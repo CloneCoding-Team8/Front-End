@@ -1,24 +1,39 @@
 import styled from 'styled-components'
+import { useSelector, useDispatch } from "react-redux";
+import React from 'react'
+
 
 function Body () {
+
+    const dispatch = useDispatch();
+
+    const productLists = useSelector((state) => state.catalog.list.content);
+
     return(
     <div>
-        <Catalog>
-            <CatalogWrap>
-                <CatalogWrapTop>
-                    <CatalogPic>
-                        상품 사진이 들어갑니다.
-                    </CatalogPic>
-                </CatalogWrapTop>
-                <CatalogWrapBot>
-                    <div>[만개특가]무무스 와이드 플랫팬 33cm 캠핑용 가정용 와이드팬</div>
-                    <div>61% 49800원</div>
-                    <div>별 4.5(36)</div>
-                    <div>무료배송</div>
-                </CatalogWrapBot>
-            </CatalogWrap>
-        </Catalog>
-    </div>)
+    {productLists.map((list, idx) => {
+        return (
+            <Catalog key={idx}>
+                <CatalogWrap>
+                    <CatalogWrapTop>
+                        <CatalogPic>
+                            상품 사진이 들어갑니다.
+                        </CatalogPic>
+                    </CatalogWrapTop>
+                    <CatalogWrapBot>
+                        <CatalogTitle>상품명이 들어갑니다.</CatalogTitle>
+                        <div>
+                            <CatalogPrice>61% 49800원</CatalogPrice>
+                            <div>별 4.5(36)</div>
+                            <div>무료배송</div>
+                        </div>
+                    </CatalogWrapBot>
+                </CatalogWrap>
+            </Catalog>
+                )
+            })}
+    </div>
+    )
 }
 
 const Catalog = styled.div`
@@ -26,8 +41,8 @@ const Catalog = styled.div`
 `
 
 const CatalogWrap = styled.div`
-    /* border: 1px solid black; */
-    width: 370px;
+    border: 1px solid black;
+    width: 390px;
     height: 600px;;
     display: flex;
     flex-flow: column nowrap;
@@ -36,9 +51,9 @@ const CatalogWrap = styled.div`
 `
 
 const CatalogWrapTop = styled.div`
-    /* border: 1px solid black; */
-    width: 370px;
-    height: 350px;;
+    border: 1px solid black;
+    width: 380px;
+    height: 380px;;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -47,8 +62,8 @@ const CatalogWrapTop = styled.div`
 
 const CatalogPic = styled.div`
     border: 1px solid black;
-    width: 350px;
-    height: 350px;
+    width: 380px;
+    height: 380px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,8 +71,8 @@ const CatalogPic = styled.div`
 `
 
 const CatalogWrapBot = styled.div`
-    /* border: 1px solid black; */
-    width: 370px;
+    border: 1px solid black;
+    width: 380px;
     height: 200px;;
     display: flex;
     flex-flow: column nowrap;
@@ -66,7 +81,18 @@ const CatalogWrapBot = styled.div`
 `
 
 const CatalogTitle = styled.div`
+    /* font-weight: bold; */
+    font-size: 17px;
+    margin-top: 15px;
+`
 
+const CatalogPrice = styled.div`
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
 `
 
 export default Body
+
+
+
