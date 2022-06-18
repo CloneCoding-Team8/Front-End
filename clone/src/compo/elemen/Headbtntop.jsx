@@ -1,12 +1,16 @@
-import '../../App.css';
 import styled from 'styled-components'
+
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 function HeadBtntop() {
 
+    const navigate = useNavigate();
+
+
   return (
     <div style={{marginLeft:'160px'}}>
-        <TopButton>로그인</TopButton>
-        <TopButton>회원가입</TopButton>
+        <TopButton onClick={() => {navigate(`/login`)}}>로그인</TopButton>
+        <TopButton onClick={() => {navigate(`/join`)}}>회원가입</TopButton>
         <TopButton>마이페이지</TopButton>
         <TopButton>장바구니</TopButton>
         <TopButton>고객센터</TopButton>
@@ -23,6 +27,7 @@ const TopButton = styled.button`
     outline: none;
     font-size: 12px;
     color: #757575;
+    cursor: pointer;
     /* font-weight: bold; */
 `;
 

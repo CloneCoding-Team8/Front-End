@@ -1,14 +1,19 @@
 import '../../App.css';
 import styled from 'styled-components'
 import Headbtntop from "../elemen/Headbtntop"
+import { Routes, Route, useNavigate } from "react-router-dom";
+
 
 
 function HeadFormbot() {
+
+    const navigate = useNavigate();
+
   return (
     // <HeadDiv>
         <HeadBack>
             <HeadTitle>
-                <span>천개스토어</span>
+                <span onClick={() => {navigate(`/`)}}>천개스토어</span>
             </HeadTitle>
                 <Headbtntop/>
         </HeadBack>
@@ -19,7 +24,9 @@ function HeadFormbot() {
 const HeadTitle = styled.div`
     font-family: 'Do Hyeon';
     font-size: 36px;
-    margin-right: 50px;
+    margin-right: 360px;
+    cursor: pointer;
+    /* border: 1px solid black; */
 `
 
 const HeadBack = styled.div`
@@ -31,6 +38,7 @@ const HeadBack = styled.div`
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
+    margin-top: 10px;
 `
 
 export default HeadFormbot

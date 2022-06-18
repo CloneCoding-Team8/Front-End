@@ -55,6 +55,36 @@ export const loadCatalogAxios = (pageViewNum) => {
   };
 };
 
+// export const loadPostsListAxios = (mount) => { // 전체 게시글 리스트 불러오기
+// 	return async (dispatch) => {
+// 		if(mount){
+// 		await apis
+//         .postList().then((res) => {
+// 				console.log(res, 'main page posts list response')
+// 				const post_list = res.data;
+// 				dispatch(loadPostsList(post_list));
+// 			})
+// 			.catch((err) => {
+// 				console.error(err, 'main page posts list error');
+// 				const alert = async () => {
+// 					await window.alert(err.response.data);
+// 					if(err.response.status === 400){
+// 						window.location.href = '/';
+// 					}
+// 				}
+// 				alert();
+// 			});
+// 		}else{
+// 			dispatch(resetPostsList())
+// 		}
+// 	};
+// };
+
+
+
+
+
+
 // export const loadDetailAxios = (id) => {
 //   return async function (dispatch) {
 //     await apis

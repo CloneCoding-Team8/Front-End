@@ -38,21 +38,36 @@ api.interceptors.request.use(function (config) {
 // api body
 export const apis = {
   // article (에이젝스 요청)
-  catalogList: (pageViewNum) => api.get(`/api/bookreviews?page=${pageViewNum}&size=4`),
-  bookpost: (frm) => imgApi.post("/api/bookreviews", frm),
+  catalogList: (pageViewNum) => api.get(`/api/product/list?page=${pageViewNum}&size=3`),
+
+//   bookpost: (frm) => imgApi.post("/api/bookreviews", frm),
+
 //   likeit: (id) => api.post(`/api/bookreviews/${id}/like`),
+
   bookDetail: (id) => api.get(`/api/bookreviews/${id}`),
-  editBook: (id, title, content, rate, url) =>
-    api.patch(`/api/bookreviews/${id}`, {
-      bookBuyUrl: url,
-      rank: rate,
-      title: title,
-      content: content,
-    }),
+
+  productInfo: (id, img, title, price, delivecost, star) =>
+  api.get(`/api/product/list/${id}` , {
+    id: id,
+    productimg: img,
+    title: title,
+    price: price,
+    deliver: delivecost,
+    star: star
+  }),
+
+//   editBook: (id, title, content, rate, url) =>
+//     api.patch(`/api/bookreviews/${id}`, {
+//       bookBuyUrl: url,
+//       rank: rate,
+//       title: title,
+//       content: content,
+//     }),
+
   bookDelete: (id) => api.delete(`/api/bookreviews/${id}`),
 
 
-  
+
   // user
   login: (id, pw) =>
     api.post("/api/authenticate", { username: id, password: pw }),

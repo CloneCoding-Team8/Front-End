@@ -8,8 +8,6 @@ import Logo from "../../image/logo_rcp.png"
 
 function HeadFormbot(props) {
 
-    const Login = props.login
-
   return (
     <>
         <HeadBack>
@@ -17,9 +15,7 @@ function HeadFormbot(props) {
                 <HeadbtnLong />
             </div>
             <Headbtn />
-            <div style={{marginLeft:'20px'}}>
-                <img src={Logo} />
-            </div>
+            <Imgbtn><img src={Logo} /></Imgbtn>
             <div style={{marginLeft:'60px'}}>
                 <SearchBar/>
             </div>
@@ -32,12 +28,17 @@ const HeadBack = styled.div`
     /* border:1px solid black; */
     border-bottom: 1px solid #B0BEC5;
     width: auto;
-    height: 60px;
+    height: 70px;
     background-color:transparent;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
 `;
+
+const Imgbtn = styled.div`
+    cursor: pointer;
+    margin-left:20px;
+`
 
 export default HeadFormbot

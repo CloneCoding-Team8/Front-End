@@ -7,11 +7,11 @@ function Body () {
 
     const dispatch = useDispatch();
 
-    const productLists = useSelector((state) => state.catalog.list.content);
+    const productLists = useSelector((state) => state);
 
     return(
     <div>
-    {productLists.map((list, idx) => {
+    {/* {productLists.map((list, idx) => {
         return (
             <Catalog key={idx}>
                 <CatalogWrap>
@@ -31,7 +31,7 @@ function Body () {
                 </CatalogWrap>
             </Catalog>
                 )
-            })}
+            })} */}
     </div>
     )
 }

@@ -11,12 +11,10 @@ function AddForm() {
     <>
         <Addbar>
             <AddDivider>
-                <div>
-                    <img src = {add1}/>
-                    <img src = {add2} style={{display:'none'}}/>
-                    <img src = {add3} style={{display:'none'}}/>
-                    <img src = {add4} style={{display:'none'}}/>
-                </div>
+                    <ImageWrap ><img src = {add1} style={{}}/></ImageWrap>
+                    <ImageWrap ><img src = {add2} style={{}}/></ImageWrap>
+                    <ImageWrap ><img src = {add3} style={{}}/></ImageWrap>
+                    <ImageWrap ><img src = {add4} style={{}}/></ImageWrap>
             </AddDivider>
         </Addbar>
     </>
@@ -26,10 +24,10 @@ function AddForm() {
 const AddDivider = styled.div`
     /* border:1px solid black; */
     height: 500px;
-    width: 200px;
+    width: 1200px;
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 `
 
@@ -41,6 +39,15 @@ const Addbar = styled.div`
     justify-content: center;
     align-items: center;
 `;
+
+const ImageWrap = styled.div`
+    /* border: 1px solid black; */
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    
+`
 
 
 export default AddForm
