@@ -1,23 +1,29 @@
 import '../../App.css';
 import styled from 'styled-components'
 
-function Headbtntop() {
+function HeadBtntop() {
+
   return (
-    <>
-        <Topbutton>베스트</Topbutton>
-    </>
+    <div style={{marginLeft:'160px'}}>
+        <TopButton>로그인</TopButton>
+        <TopButton>회원가입</TopButton>
+        <TopButton>마이페이지</TopButton>
+        <TopButton>장바구니</TopButton>
+        <TopButton>고객센터</TopButton>
+    </div>
     )
 }
 
-const Topbutton = styled.button`
-    width: 50px;
+const TopButton = styled.button`
+    width: 70px;
     height: 20px;
     background-color: transparent;
-    /* border: none; */
+    /* border: 1px solid black; */
+    border: none;
     outline: none;
-    font-size: 10px;
-    color: #757575
+    font-size: 12px;
+    color: #757575;
     /* font-weight: bold; */
 `;
 
-export default Headbtntop
+export default HeadBtntop
