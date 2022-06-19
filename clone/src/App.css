@@ -105,18 +105,36 @@
   margin-right: 5px;
 } */
 
+/* .ImgAnimation {
+  animation: slide 5s infinite;
+} */
+
+/* .ImgAnimation2 {
+  display: inline-block;
+  animation: slide infinite;
+  animation-delay: -4s;
+  animation-fill-mode: forwards;
+} */
+
+/* .ImgAnimation3 {
+  animation: slide 2s infinite;
+  animation-fill-mode: forwards;
+}
+
+.ImgAnimation4 {
+  animation: slide 2s infinite;
+  animation-fill-mode:backwards;
+}
 
 
-
-
-
-
-
-
-
-
-
-
+@keyframes slide {
+  from {
+    display: none;
+  }
+  to {
+    display: block;
+  }
+} */
 
 
 
@@ -129,6 +147,7 @@
   to {
     transform: rotate(360deg);
   }
+
 }
 
 

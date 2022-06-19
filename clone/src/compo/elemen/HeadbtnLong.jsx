@@ -56,7 +56,7 @@ const ListPop = styled.ul`
 const InListPop = styled.div`
     width: 80px;
     /* border: 1px solid black; */
-    font-size: 20px;
+    font-size: 17px;
     margin: 35px;
     text-align: left;
 `

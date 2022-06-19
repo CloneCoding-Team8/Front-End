@@ -28,6 +28,7 @@ const LoginWrap = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 70px;
+    margin-bottom: 120px;
 `
 
 const LoginTitle = styled.div`

@@ -32,6 +32,7 @@ const JoinWrap = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 70px;
+    margin-bottom: 120px;
 `
 
 const JoinTitle = styled.div`
