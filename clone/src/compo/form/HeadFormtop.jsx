@@ -24,19 +24,19 @@ function HeadFormbot() {
 const HeadTitle = styled.div`
     font-family: 'Do Hyeon';
     font-size: 36px;
-    margin-right: 360px;
+    margin-right: 450px;
     cursor: pointer;
     /* border: 1px solid black; */
 `
 
 const HeadBack = styled.div`
     /* border:1px solid black; */
-    width: 100%;
+    width: 1450px;
     height: 60px;
     background-color:transparent;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     margin-top: 10px;
 `

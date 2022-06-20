@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import React from 'react'
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 
@@ -6,6 +7,16 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 function ShoppingBasket () {
 
     const navigate = useNavigate();
+
+    const [Counter, setCounter] = React.useState(1)
+
+    const onIncrease = () => {
+        setCounter(prevCount => prevCount +1)
+    }
+
+    const onDecrease = () => {
+        setCounter(prevCount => prevCount -1)
+    }
 
 
     return (
@@ -28,10 +39,18 @@ function ShoppingBasket () {
                         <BasketCatalogTopInfo1>
                             <BasketCatalogPic></BasketCatalogPic>상품/옵션정보
                         </BasketCatalogTopInfo1>
-                        <BasketCatalogTopInfoBot>수량</BasketCatalogTopInfoBot>
+                        <BasketCatalogCounter>
+                            {Counter}
+                            <div>
+                            <CounterBtn onClick={onDecrease}>-</CounterBtn>
+                            <CounterBtn onClick={onIncrease}>+</CounterBtn>
+                            </div>
+                        </BasketCatalogCounter>
                         <BasketCatalogTopInfoBot>상품금액</BasketCatalogTopInfoBot>
                         <BasketCatalogTopInfoBot>합계금액</BasketCatalogTopInfoBot>
-                        <BasketCatalogTopInfoBot>삭제</BasketCatalogTopInfoBot>
+                        <BasketCatalogTopInfoBot>
+                            <DeleteBtn>삭제</DeleteBtn>
+                        </BasketCatalogTopInfoBot>
                     </BasketCatalogMid>
                 </BasketCatalogWrap>
                 <GotoHome onClick={() => {navigate(`/`)}}> 쇼핑계속하기 </GotoHome>
@@ -277,6 +296,46 @@ const BtnWrap = styled.div`
     width: 1100px;
     justify-content: flex-end;
     align-items: flex-end;
+`
+
+const BasketCatalogCounter = styled.div`
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    border-left: 1px solid Gainsboro;
+    height: 300px;
+    padding-right: 30px;
+    padding-left: 30px;
+    width: 60px;
+`
+
+const CounterBtn = styled.button`
+    border: none;
+    outline: none;
+    margin: 5px;
+    width: 20px;
+    height: 20px;
+    color: white;
+    font-size: 16px;
+    background-color: #00B140;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    cursor: pointer;
+`
+
+const DeleteBtn = styled.button`
+    width: 40px;
+    padding: 5px;
+    font-size: 14px;
+    background-color: #00B140;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
 `
 
 export default ShoppingBasket

@@ -22,10 +22,10 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <HeadFormAlign>
         <HeadFormtop/>
         <HeadFormbot/>
-      </div>
+      </HeadFormAlign>
       <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
@@ -40,7 +40,12 @@ function App() {
   );
 }
 
-
+const HeadFormAlign = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+`
 
 
 export default App;

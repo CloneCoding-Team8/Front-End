@@ -27,7 +27,7 @@ function HeadFormbot(props) {
 const HeadBack = styled.div`
     /* border:1px solid black; */
     border-bottom: 1px solid #B0BEC5;
-    width: auto;
+    width: 1450px;
     height: 70px;
     background-color:transparent;
     display: flex;
