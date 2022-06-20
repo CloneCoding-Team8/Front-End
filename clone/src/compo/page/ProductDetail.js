@@ -1,7 +1,12 @@
 import styled from 'styled-components'
+import { Routes, Route, useNavigate } from "react-router-dom";
+
 
 
 function ProductDetail () {
+
+    const navigate = useNavigate();
+
     return (
         <>
         <ProductDetailWrap>
@@ -30,7 +35,7 @@ function ProductDetail () {
                 </DetailPointSelectBox>
             </DetailPoint>
             <DetilButtonWrap>
-                <DetailButton>장바구니</DetailButton>
+                <DetailButton onClick={() => {navigate(`/basket`)}}>장바구니</DetailButton>
                 <DetailButton2>바로구매</DetailButton2>
             </DetilButtonWrap>
         </ProductDetailRightWrap>
@@ -48,6 +53,7 @@ const ProductDetailWrap = styled.div`
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
+    margin-bottom: 140px;
 `
 
 const ProductDetailLeftWrap = styled.div`
@@ -152,6 +158,7 @@ const DetailButton = styled.button`
     outline: none;
     color: #6CC24A;
     background-color: transparent;
+    cursor: pointer;
 `
 
 const DetailButton2 = styled.button`
@@ -165,7 +172,7 @@ const DetailButton2 = styled.button`
     border-radius: 5px;
     border: none;
     color: white;
-
+    cursor: pointer;
 `
 
 export default ProductDetail

@@ -12,6 +12,7 @@ import ProductDetail from "./compo/page/ProductDetail"
 import Main from "./compo/page/Main"
 import Login from "./compo/page/Login"
 import Join from "./compo/page/Join"
+import Basket from "./compo/page/ShoppingBasket"
 
 
 
@@ -29,9 +30,10 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<Join />} />
+            <Route path="/basket" element={<Basket />} />
+            <Route path="/productdetail" element={<ProductDetail />} />
       </Routes>
       <div>
-        <ProductDetail/>
         <FooterForm />
       </div>
     </div>

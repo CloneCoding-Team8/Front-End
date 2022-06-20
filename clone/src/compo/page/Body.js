@@ -1,13 +1,18 @@
 import styled from 'styled-components'
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import React from 'react'
+
 import Prev from "../../image/left_icon.svg"
 import Next from "../../image/right_icon.svg"
+import Detail from './ProductDetail'
+
 
 
 
 function Body() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const productLists = Array.from({ length: 3 }, (v, i) => i);
 
@@ -17,7 +22,7 @@ function Body() {
           <Left><img src={Prev} /></Left>
         {productLists.map((list, idx) => {
           return (
-            <CatalogWrap key={idx}>
+            <CatalogWrap key={idx} onClick={() => {navigate(`/productdetail`)}}>
                 <CatalogPic>상품 사진이 들어갑니다.</CatalogPic>
               <CatalogWrapBot>
                 <CatalogTitle>상품명이 들어갑니다.</CatalogTitle>
@@ -74,6 +79,7 @@ const CatalogWrap = styled.div`
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 `
 
 const CatalogPic = styled.div`
