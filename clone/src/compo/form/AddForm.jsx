@@ -14,7 +14,6 @@ function AddForm() {
     
     React.useEffect(() => {
         setTimeout(() => {setBannerState(bannerState === 1 ? 4 : bannerState - 1)}, 4000)
-        console.log('타임아웃 작동 중입니다.')
     })
 
   return (
