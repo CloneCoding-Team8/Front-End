@@ -9,23 +9,30 @@ import axios from "axios";
 // });
 
 const api = axios.create({
-  baseURL: "http://15.164.218.19",
+  baseURL: "http://13.124.166.209",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
   },
 });
 
-// interruptor (유저의 로그인 정보)
+// localStorage.setItem("token", token)
+
+// interceptors (유저의 로그인 정보)
 // Bearer가 백엔드의 토큰을 검사함
+// 새로고침을 해도 겟아이템 함수를 사용해서 토큰값을 유지할 수 있도록 인터셉터가 존재
 
 api.interceptors.request.use(function (config) {
-  const accessToken = document.cookie.split("=")[1];
+  const accessToken = `${localStorage.getItem("token")}`;
+  console.log(accessToken)
   if (accessToken !== undefined) {
     config.headers.common["Authorization"] = `Bearer ${accessToken}`;
   }
   return config;
 });
+
+
+
 
 // imgApi.interceptors.request.use(function (config) {
 //   const accessToken = document.cookie.split("=")[1];
@@ -70,15 +77,21 @@ export const apis = {
 
   // user
   login: (id, pw) =>
-    api.post("/api/authenticate", { username: id, password: pw }),
+    api.post("/user/login", { 
+        username: id, 
+        password: pw 
+    }),
   logout: () => api.post("/logout", {}),
   signup: (id, nick, pw, pwcheck) =>
-    api.post("/api/signup", {
+    api.post("/user/signup", {
       username: id,
       nickname: nick,
       password: pw,
       confirmPassword: pwcheck,
     }),
+  idcheck: (id) => api.post("/user/signup/idcheck", {
+      username: id,
+  }),  
   usercheck: () => api.get("/api/authentication"),
 
 };

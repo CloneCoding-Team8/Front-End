@@ -51,9 +51,12 @@ export const loadUserAxios = () => {
   return async function (dispatch) {
     await apis
       .usercheck()
+
       .then((info) => {
-        dispatch(userinfo(info));
+        dispatch(userinfo(info))
+        console.log('성공?');
       })
+
       .catch((err) => {
         console.log(err);
         dispatch(logOut());
@@ -61,17 +64,23 @@ export const loadUserAxios = () => {
   };
 };
 
+
+
+
 // 로그인 미들웨어
 export const loginAxios = (id, pw) => {
   return async function (dispatch) {
     let success = null;
     await apis
       .login(id, pw)
+
       .then((res) => {
-        setCookie("JWTToken", res.data.token);
+        localStorage.setItem("token")
         dispatch(login(id));
         success = true;
+        console.log('성공했니')
       })
+
       .catch((err) => {
         success = false;
         alert("아이디와 패스워드를 확인해주세요!");
@@ -80,15 +89,21 @@ export const loginAxios = (id, pw) => {
   };
 };
 
+
+
+
 // 회원가입 미들웨어
 export const signupAxios = (id, nick, pw, pwcheck) => {
   return async function (dispatch) {
     let res = null;
     await apis
       .signup(id, nick, pw, pwcheck)
+
       .then(() => {
         res = true;
+        console.log('성공')
       })
+
       .catch((err) => {
         console.log(err);
         res = err;
@@ -97,9 +112,11 @@ export const signupAxios = (id, nick, pw, pwcheck) => {
   };
 };
 
+
 // reducer
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
+
     case "user/LOGIN": {
       const newUserInfo = {
         username: action.id,
@@ -108,6 +125,7 @@ export default function reducer(state = initialState, action = {}) {
       };
       return { userinfo: newUserInfo };
     }
+
     case "user/LOGOUT": {
       deleteCookie("JWTToken");
       const newUserInfo = {
@@ -117,6 +135,7 @@ export default function reducer(state = initialState, action = {}) {
       };
       return { userinfo: newUserInfo };
     }
+
     case "user/USERINFO": {
       const newUserInfo = {
         username: action.info.data.principal.user.username,

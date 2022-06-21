@@ -1,7 +1,51 @@
 import styled from 'styled-components'
+import React from 'react'
+
+import { loginAxios } from "../../redux/modules/user";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 
 function Login() {
+
+    const usernameRef = React.useRef(null);
+    const passwordRef = React.useRef(null);
+  
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const loginFunction = async () => {
+        if (
+          usernameRef.current.value === "" ||
+          passwordRef.current.value === "" ||
+          usernameRef.current.value === " " ||
+          passwordRef.current.value === " " ||
+          usernameRef.current.value === null ||
+          passwordRef.current.value === null
+        ) {
+          alert("아이디, 비밀번호를 채워주세요!");
+          return false;
+        }
+        document.getElementById("LoginBtn").disabled = true;
+        try {
+          await dispatch(
+            loginAxios(usernameRef.current.value, passwordRef.current.value)
+          ).then((success) => {
+            console.log(success);
+            if (success === true) {
+              navigate("/");
+              alert("로그인되었습니다!");
+            } else {
+              document.getElementById("LoginBtn").disabled = false;
+            }
+          });
+        } catch (err) {
+          console.log("Error >>", err);
+          document.getElementById("LoginBtn").disabled = false;
+        }
+      };
+
+
     return(
         <LoginWrap>
             <LoginTitle>
@@ -13,14 +57,15 @@ function Login() {
                     <Labellogin>패스워드</Labellogin>
                 </InLeft>
                 <Inright>
-                    <Input></Input>
-                    <Input></Input>
+                    <Input ref={usernameRef}></Input>
+                    <Input ref={passwordRef}></Input>
                 </Inright>
             </InputWrap>
-            <LoginBtn>로그인하기</LoginBtn>
+            <LoginBtn onClick={loginFunction} id="LoginBtn">로그인하기</LoginBtn>
         </LoginWrap>
         )
 }
+
 
 const LoginWrap = styled.div`
     display: flex;

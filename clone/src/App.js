@@ -14,6 +14,9 @@ import Login from "./compo/page/Login"
 import Join from "./compo/page/Join"
 import Basket from "./compo/page/ShoppingBasket"
 
+// import Test from "./compo/page/Test"
+
+
 
 
 function App() {
@@ -34,6 +37,7 @@ function App() {
             <Route path="/productdetail" element={<ProductDetail />} />
       </Routes>
       <div>
+        {/* <Test/> */}
         <FooterForm />
       </div>
     </div>

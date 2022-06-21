@@ -1,7 +1,82 @@
 import styled from 'styled-components'
+import React from 'react'
+
+import { signupAxios } from "../../redux/modules/user";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 
 function Join() {
+    const usernameRef = React.useRef(null);
+    const nicknameRef = React.useRef(null);
+    const passwordRef = React.useRef(null);
+    const confirmPasswordRef = React.useRef(null);
+  
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+
+    const signupFunction = async () => {
+        if (
+          usernameRef.current.value === "" ||
+          nicknameRef.current.value === "" ||
+          passwordRef.current.value === "" ||
+          confirmPasswordRef.current.value === "" ||
+          usernameRef.current.value === " " ||
+          nicknameRef.current.value === " " ||
+          passwordRef.current.value === " " ||
+          confirmPasswordRef.current.value === " " ||
+          usernameRef.current.value === null ||
+          nicknameRef.current.value === null ||
+          passwordRef.current.value === null ||
+          confirmPasswordRef.current.value === null
+        ) {
+          alert("아이디, 닉네임, 비밀번호를 채워주세요!");
+          return false;
+        }
+        document.getElementById("SigninBtn").disabled = true;
+        try {
+          await dispatch(
+            signupAxios(
+              usernameRef.current.value,
+              nicknameRef.current.value,
+              passwordRef.current.value,
+              confirmPasswordRef.current.value
+            )
+          ).then((res) => {
+            if (res === true) {
+              console.log(res);
+              navigate("/login");
+              alert("회원가입되었습니다!");
+            } else {
+              if (res.response.data.message === "the username already exists.") {
+                alert("이미 가입된 ID입니다!");
+                document.getElementById("SigninBtn").disabled = false;
+              } else if (
+                res.response.data.message === "the nickname already exists."
+              ) {
+                alert("이미 가입된 닉네임입니다!");
+                document.getElementById("SigninBtn").disabled = false;
+              } else if (res.response.data.errors[0] === undefined) {
+                alert("입력한 내용을 다시 확인해주세요!");
+                document.getElementById("SigninBtn").disabled = false;
+              } else {
+                alert(
+                  res.response.data.errors[0].field +
+                    "에 " +
+                    res.response.data.errors[0].reason
+                );
+                document.getElementById("SigninBtn").disabled = false;
+              }
+            }
+          });
+        } catch (err) {
+          alert("에러입니다!" + err);
+        }
+      };
+
+
+
     return(
         <JoinWrap>
             <JoinTitle>
@@ -15,13 +90,13 @@ function Join() {
                     <LabelJoin>패스워드 확인</LabelJoin>
                 </JoinInLeft>
                 <JoinInright>
-                    <Input></Input>
-                    <Input></Input>
-                    <Input></Input>
-                    <Input></Input>
+                    <Input ref={usernameRef}></Input>
+                    <Input ref={nicknameRef}></Input>
+                    <Input ref={passwordRef}></Input>
+                    <Input ref={confirmPasswordRef}></Input>
                 </JoinInright>
             </JoinInputWrap>
-            <JoinBtn>회원 가입</JoinBtn>
+            <JoinBtn onClick={signupFunction} id="SigninBtn">회원 가입</JoinBtn>
         </JoinWrap>
         )
 }
