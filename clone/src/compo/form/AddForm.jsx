@@ -20,10 +20,10 @@ function AddForm() {
     <Addbar >
         <AddDivider >
             <div>
-            <ImageWrap  className="ImgAnimation" style={{ display: bannerState === 1 ? "" : "none" }}></ImageWrap>
-            <ImageWrap2 className="ImgAnimation" style={{ display: bannerState === 2 ? "" : "none" }}></ImageWrap2>
-            <ImageWrap3 className="ImgAnimation" style={{ display: bannerState === 3 ? "" : "none" }}></ImageWrap3>
-            <ImageWrap4 className="ImgAnimation" style={{ display: bannerState === 4 ? "" : "none" }}/>
+            <ImageWrap  style={{ display: bannerState === 1 ? "" : "none" }}></ImageWrap>
+            <ImageWrap2 style={{ display: bannerState === 2 ? "" : "none" }}></ImageWrap2>
+            <ImageWrap3 style={{ display: bannerState === 3 ? "" : "none" }}></ImageWrap3>
+            <ImageWrap4 style={{ display: bannerState === 4 ? "" : "none" }}/>
             </div>
         </AddDivider>
     </Addbar>

@@ -11,11 +11,15 @@ function ShoppingBasket () {
     const [Counter, setCounter] = React.useState(1)
 
     const onIncrease = () => {
-        setCounter(prevCount => prevCount +1)
+        setCounter(Counter +1)
     }
 
     const onDecrease = () => {
-        setCounter(prevCount => prevCount -1)
+        if(Counter > 0){
+            setCounter(Counter - 1);
+            }else{
+                window.alert('상품이 없습니다.')
+            }
     }
 
 
