@@ -1,13 +1,7 @@
 import axios from "axios";
+import {getCookie} from "universal-cookie";
 
 // axios create (axios 골격)
-// const imgApi = axios.create({
-//   baseURL: "http://15.164.218.19",
-//   headers: {
-//     "content-type": "multipart/form-data",
-//   },
-// });
-
 const api = axios.create({
   baseURL: "http://13.124.166.209",
   headers: {
@@ -16,7 +10,11 @@ const api = axios.create({
   },
 });
 
+
 const token = localStorage.getItem("jwtToken");
+// const cookies = new Cookies();
+// let getting = browser.cookies.get("refreshtoken")
+
 
 api.interceptors.request.use(function (config) 
     {config.headers.common["Authorization"] = `Bearer ${token}`;
@@ -29,13 +27,9 @@ export const localStorageSet = (name, value) => {
     if(typeof(Storage) !== "undefined")
     { window.localStorage.setItem(name, JSON.stringify(value)) } };
 
-// imgApi.interceptors.request.use(function (config) {
-//   const accessToken = document.cookie.split("=")[1];
-//   if (accessToken !== undefined) {
-//     config.headers.common["Authorization"] = `Bearer ${accessToken}`;
-//   }
-//   return config;
-// });
+export const localStorageRemove = (accesstoken) => { 
+    return window.localStorage.removeItem(accesstoken) };
+
 
 // api body
 export const apis = {
@@ -58,17 +52,9 @@ export const apis = {
     star: star
   }),
 
-//   editBook: (id, title, content, rate, url) =>
-//     api.patch(`/api/bookreviews/${id}`, {
-//       bookBuyUrl: url,
-//       rank: rate,
-//       title: title,
-//       content: content,
-//     }),
+
 
   bookDelete: (id) => api.delete(`/api/bookreviews/${id}`),
-
-
 
   // user
   login: (id, pw) =>
@@ -76,7 +62,12 @@ export const apis = {
         username: id, 
         password: pw 
     }),
-  logout: () => api.post("/logout", {}),
+
+  logout: (refreshtoken) => 
+    api.post("/user/logout", {
+        // refreshtoken: getCookie(refreshtoken)
+    }),
+
   signup: (id, nick, pw, pwcheck) =>
     api.post("/user/signup", {
       username: id,
@@ -124,6 +115,27 @@ export const apis = {
 //     return JSON.parse(window.localStorage.getItem(name)) }; 
 
 // 로컬 스토리지 해당 key 삭제 
-// export const localStorageRemove = (name) => { 
-//     return window.localStorage.removeItem(name) };
 
+
+// const imgApi = axios.create({
+//   baseURL: "http://15.164.218.19",
+//   headers: {
+//     "content-type": "multipart/form-data",
+//   },
+// });
+
+// imgApi.interceptors.request.use(function (config) {
+//   const accessToken = document.cookie.split("=")[1];
+//   if (accessToken !== undefined) {
+//     config.headers.common["Authorization"] = `Bearer ${accessToken}`;
+//   }
+//   return config;
+// });
+
+//   editBook: (id, title, content, rate, url) =>
+//     api.patch(`/api/bookreviews/${id}`, {
+//       bookBuyUrl: url,
+//       rank: rate,
+//       title: title,
+//       content: content,
+//     }),

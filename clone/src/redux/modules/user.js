@@ -1,6 +1,7 @@
 import produce from "immer";
 import { deleteCookie, setCookie } from "../../shared/Cookie";
-import { apis, localStorageGet } from "../../shared/api";
+import { apis, localStorageRemove } from "../../shared/api";
+import Cookies from "universal-cookie";
 
 // action
 const LOGIN = "user/LOGIN";
@@ -44,32 +45,21 @@ export const loadUserAxios = () => {
 
       .catch((err) => {
         console.log(err);
-        dispatch(logOut());
+        // dispatch(logOut());
       });
   };
 };
 
 
-// .then((res) => {
-//     localStorage.getItem("token", res.data.token)
-//     dispatch(login(id));
-//     console.log('성공했니')
-//     success = true;
-//   })
-
-
-
-
 // 로그인 미들웨어
 export const loginAxios = (id, pw) => {
   return async function (dispatch) {
-    
-    console.log('로그인 될까')
     let success = null;
     await apis
       .login(id, pw)
 
       .then((res) => {
+          console.log(res)
         localStorage.setItem("accesstoken", res.data.accesstoken)        
         setCookie("refreshtoken", res.data.refreshtoken)        
         dispatch(login(id));
@@ -84,8 +74,6 @@ export const loginAxios = (id, pw) => {
     return success;
   };
 };
-
-
 
 
 // 회원가입 미들웨어
@@ -109,6 +97,23 @@ export const signupAxios = (id, nick, pw, pwcheck) => {
 };
 
 
+export const signOutAxios = () => {
+    return async (dispatch) => {
+        const getting = Cookies.get("refreshtoken")
+        console.log(getting)
+
+        await apis
+        
+        .logout ()
+        .then((res) => {
+            
+          })
+   
+        dispatch(logOut());
+    }
+  }
+
+
 // reducer
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -123,7 +128,9 @@ export default function reducer(state = initialState, action = {}) {
     }
 
     case "user/LOGOUT": {
-      deleteCookie("JWTToken");
+      window.localStorage.removeItem("accesstoken");
+      deleteCookie("refreshtoken");    
+      
       const newUserInfo = {
         username: null,
         nickname: null,
@@ -167,3 +174,10 @@ export default function reducer(state = initialState, action = {}) {
 //       });
 //   };
 // };
+
+// .then((res) => {
+//     localStorage.getItem("token", res.data.token)
+//     dispatch(login(id));
+//     console.log('성공했니')
+//     success = true;
+//   })
