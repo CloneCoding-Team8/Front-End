@@ -1,6 +1,6 @@
 import produce from "immer";
 import { deleteCookie, setCookie } from "../../shared/Cookie";
-import { apis } from "../../shared/api";
+import { apis, localStorageGet } from "../../shared/api";
 
 // action
 const LOGIN = "user/LOGIN";
@@ -29,22 +29,7 @@ export function userinfo(info) {
   return { type: USERINFO, info };
 }
 
-//middlewares
 
-// 유저 정보 미들웨어
-// export const loadUser = () => {
-//   return async function (dispatch) {
-//     await apis
-//       .bookreviews()
-//       .then((user_data) => {
-//         dispatch(login(user_data.data));
-//         console.log(user_data)
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-// };
 
 //토큰 검사 미들웨어
 export const loadUserAxios = () => {
@@ -65,20 +50,31 @@ export const loadUserAxios = () => {
 };
 
 
+// .then((res) => {
+//     localStorage.getItem("token", res.data.token)
+//     dispatch(login(id));
+//     console.log('성공했니')
+//     success = true;
+//   })
+
+
 
 
 // 로그인 미들웨어
 export const loginAxios = (id, pw) => {
   return async function (dispatch) {
+    
+    console.log('로그인 될까')
     let success = null;
     await apis
       .login(id, pw)
 
       .then((res) => {
-        localStorage.setItem("token")
+        localStorage.setItem("accesstoken", res.data.accesstoken)        
+        setCookie("refreshtoken", res.data.refreshtoken)        
         dispatch(login(id));
-        success = true;
         console.log('성공했니')
+        success = true;
       })
 
       .catch((err) => {
@@ -150,3 +146,24 @@ export default function reducer(state = initialState, action = {}) {
       return state;
   }
 }
+
+
+
+
+
+//middlewares
+
+// 유저 정보 미들웨어
+// export const loadUser = () => {
+//   return async function (dispatch) {
+//     await apis
+//       .bookreviews()
+//       .then((user_data) => {
+//         dispatch(login(user_data.data));
+//         console.log(user_data)
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   };
+// };

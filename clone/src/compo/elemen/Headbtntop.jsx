@@ -9,8 +9,8 @@ function HeadBtntop() {
 
   return (
     <div style={{marginLeft:'160px'}}>
-        <TopButton onClick={() => {navigate(`/login`)}}>로그인</TopButton>
-        <TopButton onClick={() => {navigate(`/join`)}}>회원가입</TopButton>
+        <TopButton onClick={() => {navigate(`/login`)}} id="LoginBtn" btnid={"LoginBtn"}>로그인</TopButton>
+        <TopButton onClick={() => {navigate(`/join`)}} id="SigninBtn">회원가입</TopButton>
         <TopButton>마이페이지</TopButton>
         <TopButton onClick={() => {navigate(`/basket`)}}>장바구니</TopButton>
         <TopButton>고객센터</TopButton>

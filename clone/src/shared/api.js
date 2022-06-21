@@ -16,23 +16,18 @@ const api = axios.create({
   },
 });
 
-// localStorage.setItem("token", token)
+const token = localStorage.getItem("jwtToken");
 
-// interceptors (유저의 로그인 정보)
-// Bearer가 백엔드의 토큰을 검사함
-// 새로고침을 해도 겟아이템 함수를 사용해서 토큰값을 유지할 수 있도록 인터셉터가 존재
-
-api.interceptors.request.use(function (config) {
-  const accessToken = `${localStorage.getItem("token")}`;
-  console.log(accessToken)
-  if (accessToken !== undefined) {
-    config.headers.common["Authorization"] = `Bearer ${accessToken}`;
-  }
-  return config;
-});
+api.interceptors.request.use(function (config) 
+    {config.headers.common["Authorization"] = `Bearer ${token}`;
+        return config;
+    })
 
 
-
+// 로컬 스토리지 저장 
+export const localStorageSet = (name, value) => { 
+    if(typeof(Storage) !== "undefined")
+    { window.localStorage.setItem(name, JSON.stringify(value)) } };
 
 // imgApi.interceptors.request.use(function (config) {
 //   const accessToken = document.cookie.split("=")[1];
@@ -95,3 +90,40 @@ export const apis = {
   usercheck: () => api.get("/api/authentication"),
 
 };
+
+
+
+
+
+
+
+// localStorage.setItem("token", token)
+
+// interceptors (유저의 로그인 정보)
+// Bearer가 백엔드의 토큰을 검사함
+// 새로고침을 해도 겟아이템 함수를 사용해서 토큰값을 유지할 수 있도록 인터셉터가 존재
+
+// api.interceptors.request.use(function (config) {
+//   const accessToken = `${localStorage.setItem("token", config)}`;
+// //   const refreshToken = document.cookie.split("=")[1]
+//   console.log(accessToken)
+
+//   if (accessToken !== undefined) {
+//     config.headers.common["Authorization"] = `Bearer ${accessToken}`;
+//   } 
+// //   else if (refreshToken !== undefined){
+// //     config.headers.common["Authorization"] = `Bearer ${accessToken}`
+// //   }
+//   return config;
+// });
+
+
+
+// 로컬 스토리지 해당 key 조회 
+// export const localStorageGet = (name) => { 
+//     return JSON.parse(window.localStorage.getItem(name)) }; 
+
+// 로컬 스토리지 해당 key 삭제 
+// export const localStorageRemove = (name) => { 
+//     return window.localStorage.removeItem(name) };
+
