@@ -12,9 +12,17 @@ import cookies from "universal-cookie";
     document.cookie = name + "=; expires=" + date;
   };
 
-export const getCookie = () => {
-  return cookies.get()
+  const getCookie = (refreshcookie) => {
+    const cookieValue=null;
+    if(document.cookie){
+        const array=document.cookie.split((escape('refreshcookie')+'='));
+        if(array.length >= 2){
+            var arraySub=array[1].split(';');
+            cookieValue=unescape(arraySub[0]);
+        }
+    }
+    return cookieValue;
 }
   
-  export { setCookie, deleteCookie };
+  export { setCookie, deleteCookie, getCookie };
   

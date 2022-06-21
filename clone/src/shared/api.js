@@ -1,5 +1,6 @@
 import axios from "axios";
-import {getCookie} from "universal-cookie";
+// import {getCookie} from "universal-cookie";
+import { useCookies } from 'react-cookie';
 
 // axios create (axios 골격)
 const api = axios.create({
@@ -12,6 +13,9 @@ const api = axios.create({
 
 
 const token = localStorage.getItem("jwtToken");
+const tokkencall = getCookie("refreshtoken")
+
+
 // const cookies = new Cookies();
 // let getting = browser.cookies.get("refreshtoken")
 
@@ -63,9 +67,9 @@ export const apis = {
         password: pw 
     }),
 
-  logout: (refreshtoken) => 
+  logout: () => 
     api.post("/user/logout", {
-        // refreshtoken: getCookie(refreshtoken)
+       refreshtoken: tokkencall
     }),
 
   signup: (id, nick, pw, pwcheck) =>

@@ -101,14 +101,10 @@ export const signOutAxios = () => {
     return async (dispatch) => {
         const getting = Cookies.get("refreshtoken")
         console.log(getting)
-
         await apis
-        
         .logout ()
         .then((res) => {
-            
           })
-   
         dispatch(logOut());
     }
   }
