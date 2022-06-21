@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { loadCatalogAxios, changePage } from "../../redux/modules/catalog";
+
 import React from 'react'
 
 import Prev from "../../image/left_icon.svg"
@@ -14,7 +16,16 @@ function Body() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
+//   const productLists = useSelector((state) => state);
+//   const pageViewNum = useSelector((state) => state.catalog.currentPage);
+
+
   const productLists = Array.from({ length: 3 }, (v, i) => i);
+
+// React.useEffect(() => { 
+//     dispatch(loadCatalogAxios(pageViewNum)); 
+//   }, [pageViewNum]);
 
   return (
     <div>

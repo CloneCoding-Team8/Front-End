@@ -1,4 +1,7 @@
-const setCookie = (name, value, exp = 5) => {
+import cookies from "universal-cookie";
+
+
+  const setCookie = (name, value, exp = 5) => {
     let date = new Date();
     date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
     document.cookie = `${name}=${value}; expires=${date.toUTCString()}`;
@@ -8,6 +11,10 @@ const setCookie = (name, value, exp = 5) => {
     let date = new Date("2022-01-01").toUTCString();
     document.cookie = name + "=; expires=" + date;
   };
+
+export const getCookie = () => {
+  return cookies.get()
+}
   
   export { setCookie, deleteCookie };
   

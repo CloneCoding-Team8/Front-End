@@ -61,7 +61,7 @@ function Login() {
                     <Input ref={passwordRef}></Input>
                 </Inright>
             </InputWrap>
-            <LoginBtn onClick={loginFunction}>로그인하기</LoginBtn>
+            <LoginBtn onClick={loginFunction} id="LoginBtn">로그인하기</LoginBtn>
         </LoginWrap>
         )
 }

@@ -4,7 +4,7 @@ import { apis } from "../../shared/api";
 // Actions
 const LOAD = "catalog/LOAD";
 // const CREATE = "catalog/CREATE";
-// const PAGE = "catalog/PAGE";
+const PAGE = "catalog/PAGE";
 // const UPDATE = "catalog/UPDATE";
 // const DETAIL = "catalog/DETAIL";
 // const DELETE = "catalog/DELETE";
@@ -29,9 +29,9 @@ export function loadCatalog(catalog_list) {
 //   return { type: UPDATE, book_edit };
 // }
 
-// export function changePage(page) {
-//   return { type: PAGE, page };
-// }
+export function changePage(page) {
+  return { type: PAGE, page };
+}
 
 // export function detailPage(detail) {
 //   return { type: DETAIL, detail };
