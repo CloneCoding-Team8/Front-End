@@ -15,6 +15,7 @@ function HeadFormbot() {
             <HeadTitle>
                 <span onClick={() => {navigate(`/`)}}>천개스토어</span>
             </HeadTitle>
+            <WhiteSpace></WhiteSpace>
                 <Headbtntop/>
         </HeadBack>
     // </HeadDiv>
@@ -24,19 +25,24 @@ function HeadFormbot() {
 const HeadTitle = styled.div`
     font-family: 'Do Hyeon';
     font-size: 36px;
-    margin-right: 450px;
     cursor: pointer;
     /* border: 1px solid black; */
 `
 
+const WhiteSpace = styled.div`
+    /* border: 1px solid black; */
+    width: 550px;
+    height: 20px;
+`
+
 const HeadBack = styled.div`
     /* border:1px solid black; */
-    width: 1450px;
+    width: 1200px;
     height: 60px;
     background-color:transparent;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin-top: 10px;
 `

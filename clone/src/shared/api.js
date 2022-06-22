@@ -55,6 +55,10 @@ export const apis = {
     refreshtoken : refreshtoken
   }),
 
+  retoken: (refreshtoken) =>  api.post("/user/newaccesstoken", { 
+    refreshtoken : refreshtoken
+  }),
+
 
   signup: (id, nick, pw, pwcheck) =>
     api.post("/user/signup", {
