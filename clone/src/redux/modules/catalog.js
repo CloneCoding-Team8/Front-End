@@ -6,8 +6,9 @@ const LOAD = "catalog/LOAD";
 // const CREATE = "catalog/CREATE";
 const PAGE = "catalog/PAGE";
 // const UPDATE = "catalog/UPDATE";
-// const DETAIL = "catalog/DETAIL";
+const DETAIL = "catalog/DETAIL";
 // const DELETE = "catalog/DELETE";
+
 
 // Initial State
 const initialState = {
@@ -16,10 +17,93 @@ const initialState = {
   currentPage: 0,
 };
 
+
 // Action Creators
-export function loadCatalog(catalog_list) {
-  return { type: LOAD, catalog_list };
+export function loadCatalog(catalog_info) {
+  return { type: LOAD, catalog_info };
 }
+
+export function detailPage(detail) {
+  return { type: DETAIL, detail };
+}
+
+export function changePage(page) {
+  return { type: PAGE, page };
+}
+
+
+//middlewares
+export const loadCatalogAxios = (id) => {
+  return async function (dispatch) {
+    await apis
+      .catalogDetail(id)
+      .then((catalog_data) => {
+          console.log(catalog_data)
+        dispatch(loadCatalog(catalog_data.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+
+export const loadDetailAxios = (id) => {
+  return async function (dispatch) {
+    console.log(id)
+    await apis
+        
+      .productInfo(id)
+
+      .then((catalog_data) => {
+          console.log(catalog_data)
+        dispatch(detailPage(catalog_data.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+
+
+
+// Reducer
+export default function reducer(state = initialState, action = {}) {
+  switch (action.type) {
+    case "catalog/LOAD": {
+        console.log(action.catalog_info.content[0].id)
+      return {
+        list: action.catalog_info,
+        post: state.post,
+        currentPage: state.currentPage,
+      };
+    }
+
+    case "book/PAGE": {
+      return {
+        list: state.list,
+        post: state.post,
+        currentPage: action.page,
+      };
+    }
+
+    case "catalog/DETAIL": {
+        console.log(action.detail)
+      return {
+        list: state.list,
+        post: action.detail,
+        currentPage: state.currentPage,
+      };
+    }
+
+    // do reducer stuff
+    default:
+      return state;
+  }
+}
+
+
 
 // export function createReview(review_write) {
 //   return { type: CREATE, review_write };
@@ -29,31 +113,11 @@ export function loadCatalog(catalog_list) {
 //   return { type: UPDATE, book_edit };
 // }
 
-export function changePage(page) {
-  return { type: PAGE, page };
-}
 
-// export function detailPage(detail) {
-//   return { type: DETAIL, detail };
-// }
 
 // export function deleteBook(delbook) {
 //   return { type: DELETE, delbook };
 // }
-
-//middlewares
-export const loadCatalogAxios = (pageViewNum) => {
-  return async function (dispatch) {
-    await apis
-      .catalogList(pageViewNum)
-      .then((catalog_data) => {
-        dispatch(loadCatalog(catalog_data.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
 
 // export const loadPostsListAxios = (mount) => { // 전체 게시글 리스트 불러오기
 // 	return async (dispatch) => {
@@ -81,22 +145,6 @@ export const loadCatalogAxios = (pageViewNum) => {
 // };
 
 
-
-
-
-
-// export const loadDetailAxios = (id) => {
-//   return async function (dispatch) {
-//     await apis
-//       .bookDetail(id)
-//       .then((book_data) => {
-//         dispatch(detailPage(book_data.data));
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-// };
 
 // export const postBookAxios = (frm) => {
 //   return async function (dispatch) {
@@ -143,19 +191,7 @@ export const loadCatalogAxios = (pageViewNum) => {
 //   };
 // };
 
-
-
-// Reducer
-export default function reducer(state = initialState, action = {}) {
-  switch (action.type) {
-    case "catalog/LOAD": {
-      return {
-        list: action.catalog_data,
-        post: state.post,
-        currentPage: state.currentPage,
-      };
-    }
-    // case "book/CREATE": {
+ // case "book/CREATE": {
     //   const new_book_list = [...state.list, action.post];
     //   return {
     //     list: new_book_list,
@@ -163,10 +199,8 @@ export default function reducer(state = initialState, action = {}) {
     //     currentPage: state.currentPage,
     //   };
     // }
-    case "book/PAGE": {
-      return { list: state.list, post: state.post, currentPage: action.page };
-    }
-    // case "book/UPDATE": {
+
+ // case "book/UPDATE": {
     //   // const UPDATE = [...state.list, action.book_edit];
     //   return {
     //     list: action.book_edit,
@@ -174,13 +208,7 @@ export default function reducer(state = initialState, action = {}) {
     //     currentPage: state.currentPage,
     //   };
     // }
-    // case "book/DETAIL": {
-    //   return {
-    //     list: state.list,
-    //     post: action.detail,
-    //     currentPage: state.currentPage,
-    //   };
-    // }
+
     // case "book/DELETE": {
     //   return {
     //     list: state.list,
@@ -189,8 +217,39 @@ export default function reducer(state = initialState, action = {}) {
     //   };
     // }
 
-    // do reducer stuff
-    default:
-      return state;
-  }
-}
+
+
+
+
+
+
+
+    // export const postPostList = (data) => {
+    //     return async function(dispatch, getState, { history }){
+    //         // console.log(localStorageGet("jwtToken"));
+    //         // console.log("data",data.post_data);
+    //         const formData = new FormData();
+    //         formData.append("img",data.img);
+    //         formData.append(
+    //             "post-data",
+    //             new Blob([JSON.stringify(data.post_data)], {
+    //                 type:"application/json"
+    //             })
+    //         );
+    //         for (let [key, value] of formData.entries()) {
+    //             // console.log(key, value);
+    //           }
+    //         await axios({
+    //         method: "post",
+    //         url: `${BASE_URL}/cafereview`,
+    //         data: formData,
+    //         headers: {     
+    //             "Content-Type": "multipart/form-data",
+    //             'Authorization': "Bearer " + localStorageGet("jwtToken") ,
+    //         },
+    //         }).then((response)=> {
+    //             // console.log('post_response: ',response.data);
+    //             history.replace("/")
+    //         })
+    //     }
+    // }

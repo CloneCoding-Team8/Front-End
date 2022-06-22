@@ -41,6 +41,7 @@ export const loginAxios = (id, pw) => {
 
       .then((res) => {
           console.log(res)
+
           const DecodedToken = jwtDecode(res.data.accesstoken);
           console.log(DecodedToken)
 
@@ -48,14 +49,14 @@ export const loginAxios = (id, pw) => {
         setCookie("refreshtoken", res.data.refreshtoken)        
         dispatch(login({username: DecodedToken.username}));
 
-        console.log('성공했니')
+        console.log('로그인 성공')
         success = true;
         // window.location.assign("/")
       })
 
       .catch((err) => {
         success = false;
-        alert("아이디와 패스워드를 확인해주세요!");
+        alert("로그인에 실패했습니다");
       });
     return success;
   };

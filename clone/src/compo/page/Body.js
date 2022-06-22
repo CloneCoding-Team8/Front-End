@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loadCatalogAxios, changePage } from "../../redux/modules/catalog";
 
@@ -7,7 +7,6 @@ import React from 'react'
 
 import Prev from "../../image/left_icon.svg"
 import Next from "../../image/right_icon.svg"
-import Detail from './ProductDetail'
 
 
 
@@ -16,37 +15,39 @@ function Body() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const productLists = useSelector((state) => state.catalog.list.content);
 
-//   const productLists = useSelector((state) => state);
-//   const pageViewNum = useSelector((state) => state.catalog.currentPage);
+  console.log(productLists)
 
-
-  const productLists = Array.from({ length: 3 }, (v, i) => i);
-
-// React.useEffect(() => { 
-//     dispatch(loadCatalogAxios(pageViewNum)); 
-//   }, [pageViewNum]);
+React.useEffect(() => { 
+    dispatch(loadCatalogAxios()); 
+  },[]);
 
   return (
     <div>
       <Catalog>
-          <Left><img src={Prev} /></Left>
-        {productLists.map((list, idx) => {
-          return (
-            <CatalogWrap key={idx} onClick={() => {navigate(`/productdetail`)}}>
-                <CatalogPic>상품 사진이 들어갑니다.</CatalogPic>
-              <CatalogWrapBot>
-                <CatalogTitle>상품명이 들어갑니다.</CatalogTitle>
-                <div>
-                  <CatalogPrice>61% 49,800원</CatalogPrice>
-                  <CatalogStar>⭐ 4.5(36)</CatalogStar>
-                  <CatalogDelive>무료배송</CatalogDelive>
-                </div>
-              </CatalogWrapBot>
-            </CatalogWrap>
-          );
-        })}
-        <Right><img src={Next}/></Right>
+        <Left>
+          <img src={Prev} />
+        </Left>
+        {productLists === undefined
+          ? null
+          : productLists.map((list, idx) => {
+              return (
+                <CatalogWrap key={list.id} onClick={() => {navigate(`/productdetail/${list.id}`);}}>
+                  <CatalogPic style={{ backgroundImage: `url(${list.productimg})` }}></CatalogPic>
+                  <CatalogWrapBot>
+                    <CatalogTitle >{list.title}</CatalogTitle>
+                    <div>
+                      <CatalogPrice>{list.price}원</CatalogPrice>
+                      <CatalogStar>⭐ {list.star}</CatalogStar>
+                    </div>
+                  </CatalogWrapBot>
+                </CatalogWrap>
+              );
+            })}
+        <Right>
+          <img src={Next} />
+        </Right>
       </Catalog>
     </div>
   );
@@ -94,12 +95,14 @@ const CatalogWrap = styled.div`
 `
 
 const CatalogPic = styled.div`
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 380px;
     height: 380px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-position: center;
+    background-size: cover;
     color: #607D8B;
 `
 
@@ -115,7 +118,8 @@ const CatalogWrapBot = styled.div`
 
 const CatalogTitle = styled.div`
     /* font-weight: bold; */
-    font-size: 30px;
+    font-size: 20px;
+    font-weight: bold;
     margin-top: 15px;
     width: 350px;
     /* border: 1px solid black; */

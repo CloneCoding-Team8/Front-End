@@ -1,37 +1,55 @@
+import React from "react"
 import styled from 'styled-components'
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { loadDetailAxios } from "../../redux/modules/catalog";
+
+import Review from "./Review"
 
 
-
-function ProductDetail () {
-
+function ProductDetail (props) {
+    
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const param = useParams()
+    console.log(param.id)
+
+
+    const productinfo = useSelector((state) => state.catalog.list.content);
+    console.log(productinfo)
+
+    const detailinfo = useSelector((state) => state.catalog.post)
+    console.log(detailinfo)
+
+    const productid = param.id
+    const priceinfo = detailinfo.price + detailinfo.price
+    
+  React.useEffect(() => { 
+      dispatch(loadDetailAxios(productid))
+    },[]);
 
     return (
         <>
         <ProductDetailWrap>
         <ProductDetailLeftWrap>
-            <ProductPic>
-                여기에 제품 사진이 들어갑니다
+            <ProductPic style={{ backgroundImage: `url(${detailinfo.productimg})` }}>
             </ProductPic>
             <ProductPicDetailWrap>
-
             </ProductPicDetailWrap>
         </ProductDetailLeftWrap>
         <ProductDetailRightWrap>
-            <DetailTitle>여기에 제품명이 들어갑니다</DetailTitle>
-            <DetailMiniTitle>여기에 부제목이 들어갑니다</DetailMiniTitle>
-            <DetilPrice>여기에 가격 정보가 들어갑니다</DetilPrice>
-            <DetailMiniTitle>여기엔 별점이 들어갑니다</DetailMiniTitle>
-            <DetailPoint>무료배송</DetailPoint>
+            <DetailTitle>{detailinfo.title}</DetailTitle>
+            <DetilPrice>{detailinfo.price + ' \ '}원</DetilPrice>
+            <DetailMiniTitle>⭐ {' \ ' + detailinfo.star}</DetailMiniTitle>
+            <DetailPoint>상품 배송비{' \ ' + detailinfo.deliveryFee + ' \ '} 원</DetailPoint>
             <DetailPoint>134 구매</DetailPoint>
             <DetailPoint>70원 적립</DetailPoint>
             <DetailPoint>
                 <DetailPointSelectBox style={{width:"460px", padding:"10px", outline:"none"}}>
                     <option value="first">옵션 : 가격 : 재고</option>
-                    <option vlaue="second">1+1 : 가격 + 가격 : 재고</option>
-                    <option value="third">1+2 : 가격+가격+가격 : 재고</option>
-                    <option value="third">1+2 : 가격+가격+가격 : 재고</option>
+                    <option vlaue="second">1+1 : {priceinfo}원 : 재고</option>
+                    <option value="third">1+2 : {priceinfo + detailinfo.price}원 : 재고</option>
+                    <option value="third">2+2 : {priceinfo + priceinfo}원 : 재고</option>
                 </DetailPointSelectBox>
             </DetailPoint>
             <DetilButtonWrap>
@@ -40,6 +58,8 @@ function ProductDetail () {
             </DetilButtonWrap>
         </ProductDetailRightWrap>
         </ProductDetailWrap>
+
+        <Review/>
         </>
         )
 }
@@ -97,16 +117,18 @@ const DetailTitle = styled.div`
     /* border: 1px solid black; */
     width: 550px;
     height: 100px;
-    font-size: 40px;
+    font-size: 30px;
+    font-weight: bold;
     padding-left: 20px;
     padding-top: 10px;
+    margin-bottom: 20px;
 `
 
 const DetailMiniTitle = styled.div`
     /* border: 1px solid black; */
     width: 550px;
     height: 40px;
-    font-size: 16px;
+    font-size: 30px;
     padding-left: 20px;
     margin-bottom: 20px;
 `

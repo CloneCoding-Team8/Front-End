@@ -22,26 +22,24 @@ api.interceptors.request.use(function (config)
 export const apis = {
   // article (에이젝스 요청)
   catalogList: (pageViewNum) => api.get(`/api/product/list?page=${pageViewNum}&size=3`),
-
 //   bookpost: (frm) => imgApi.post("/api/bookreviews", frm),
-
 //   likeit: (id) => api.post(`/api/bookreviews/${id}/like`),
-
-  bookDetail: (id) => api.get(`/api/bookreviews/${id}`),
-
-  productInfo: (id, img, title, price, delivecost, star) =>
-  api.get(`/api/product/list/${id}` , {
-    id: id,
-    productimg: img,
-    title: title,
-    price: price,
-    deliver: delivecost,
-    star: star
-  }),
-
-
+  catalogDetail: (id) => api.get(`/api/product/list`),
+  productInfo: (productid) => api.get(`/api/product/list/${productid}`),
+//   productInfo: () => api.get('/api/product/list/9'),
 
   bookDelete: (id) => api.delete(`/api/bookreviews/${id}`),
+
+
+
+
+
+ // review api
+  load: (productid) => api.get(`/api/review/list/${productid}`),
+ add: (reviewid) => api.get(`/api/review/detail/${reviewid}`),
+ edit: (reviewid, formData) => api.patch(`/api/review/${reviewid}`, formData),
+ del: (reviewid) => api.delete(`/api/review/${reviewid}`),
+ adds: (productid, formData) => api.post(`/api/review/${productid}`, formData),
 
   // user
   login: (id, pw) =>
@@ -50,15 +48,12 @@ export const apis = {
         password: pw 
     }),
 
-
   logout: (refreshtoken) =>  api.post("/user/logout", { 
     refreshtoken : refreshtoken
   }),
-
   retoken: (refreshtoken) =>  api.post("/user/newaccesstoken", { 
     refreshtoken : refreshtoken
   }),
-
 
   signup: (id, nick, pw, pwcheck) =>
     api.post("/user/signup", {

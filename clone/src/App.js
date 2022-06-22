@@ -15,6 +15,8 @@ import Main from "./compo/page/Main"
 import Login from "./compo/page/Login"
 import Join from "./compo/page/Join"
 import Basket from "./compo/page/ShoppingBasket"
+import Reviewwrite from "./compo/page/ReviewWrite"
+import ReviewEdit from "./compo/page/ReviewEdit"
 
 
 // import Test from "./compo/page/Test"
@@ -47,7 +49,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<Join />} />
             <Route path="/basket" element={<Basket />} />
-            <Route path="/productdetail" element={<ProductDetail />} />
+            <Route path="/productdetail/:id" element={<ProductDetail />}/>
+            <Route path="/reviewwrite/:id/:productId" element={<Reviewwrite />}></Route>
+            <Route path="/reviewedit/:id/:productId" element={<ReviewEdit />}></Route>
       </Routes>
       <div>
         {/* <Test/> */}
