@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { loadUserAxios, logOut  } from "./redux/modules/user";
+import { loadUserAxios, logOut , signOutAxios } from "./redux/modules/user";
 import { useDispatch, useSelector } from "react-redux";
 
 import styled from 'styled-components'
@@ -9,7 +9,6 @@ import HeadFormbot from "./compo/form/HeadFormbot"
 import HeadFormtop from "./compo/form/HeadFormtop"
 import FooterForm from "./compo/form/FooterForm"
 import ProductDetail from "./compo/page/ProductDetail"
-import {setCookie, getCookie} from "universal-cookie";
 
 
 import Main from "./compo/page/Main"
@@ -19,6 +18,8 @@ import Basket from "./compo/page/ShoppingBasket"
 
 
 // import Test from "./compo/page/Test"
+// import {getCookie} from "./shared/Cookie"
+// import {setCookie} from "./shared/Cookie"
 
 
 
@@ -27,10 +28,12 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const loginInfo = useSelector((state) => state.user.userinfo.is_login);
+
   // const cookies = new Cookies();
+  // console.log(localStorage.getItem("accesstoken") )
+  // console.log(document.cookie)
 
-
-  console.log(document.cookie)
   // console.log(getCookie('refreshtoken'))
 
   return (

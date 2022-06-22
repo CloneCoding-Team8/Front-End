@@ -1,6 +1,5 @@
 import axios from "axios";
-// import {getCookie} from "universal-cookie";
-import { useCookies } from 'react-cookie';
+// import {tmb} from "./Cookie"
 
 // axios create (axios 골격)
 const api = axios.create({
@@ -11,29 +10,13 @@ const api = axios.create({
   },
 });
 
-
-const token = localStorage.getItem("jwtToken");
-const tokkencall = getCookie("refreshtoken")
-
-
-// const cookies = new Cookies();
-// let getting = browser.cookies.get("refreshtoken")
-
+const token = localStorage.getItem("accesstoken");
+// const reftokken = document.cookie
 
 api.interceptors.request.use(function (config) 
     {config.headers.common["Authorization"] = `Bearer ${token}`;
         return config;
     })
-
-
-// 로컬 스토리지 저장 
-export const localStorageSet = (name, value) => { 
-    if(typeof(Storage) !== "undefined")
-    { window.localStorage.setItem(name, JSON.stringify(value)) } };
-
-export const localStorageRemove = (accesstoken) => { 
-    return window.localStorage.removeItem(accesstoken) };
-
 
 // api body
 export const apis = {
@@ -67,10 +50,11 @@ export const apis = {
         password: pw 
     }),
 
-  logout: () => 
-    api.post("/user/logout", {
-       refreshtoken: tokkencall
-    }),
+
+  logout: (refreshtoken) =>  api.post("/user/logout", { 
+    refreshtoken : refreshtoken
+  }),
+
 
   signup: (id, nick, pw, pwcheck) =>
     api.post("/user/signup", {
@@ -82,14 +66,18 @@ export const apis = {
   idcheck: (id) => api.post("/user/signup/idcheck", {
       username: id,
   }),  
-  usercheck: () => api.get("/api/authentication"),
+//   usercheck: () => api.get("/api/authentication"),
 
 };
 
 
+// // 로컬 스토리지 저장 
+// export const localStorageSet = (name, value) => { 
+//     if(typeof(Storage) !== "undefined")
+//     { window.localStorage.setItem(name, JSON.stringify(value)) } };
 
-
-
+// export const localStorageRemove = (accesstoken) => { 
+//     return window.localStorage.removeItem(accesstoken) };
 
 
 // localStorage.setItem("token", token)
@@ -143,3 +131,6 @@ export const apis = {
 //       title: title,
 //       content: content,
 //     }),
+
+
+// 변수명: 토큰

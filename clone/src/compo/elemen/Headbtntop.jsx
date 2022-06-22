@@ -14,17 +14,21 @@ function HeadBtntop() {
     const loginInfo = useSelector((state) => state.user.userinfo.is_login);
   
   
+    const refreshtoken = document.cookie 
+    console.log(document.cookie)
+
     const logOutUser = () => {
-      dispatch(signOutAxios())
-      dispatch(logOut())
+      dispatch(signOutAxios(refreshtoken))
+      // dispatch(logOut())
     };
   
+    
   
-    React.useEffect(() => {
-      if (loginInfo === false) {
-        dispatch(loadUserAxios());
-      }
-    });
+    // React.useEffect(() => {
+    //   if (loginInfo === false) {
+    //     dispatch(loadUserAxios());
+    //   }
+    // });
 
 
 
