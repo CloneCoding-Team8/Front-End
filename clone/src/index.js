@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-// 리덕스 관련
-import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import store from "./redux/configStore";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

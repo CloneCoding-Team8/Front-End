@@ -1,32 +1,133 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.HeadWrap{
+  /* border: 1px solid black; */
+  width: auto;
+  height: 120px;
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.HeadTopWrap{
+  font-family: 'Do Hyeon';
+  font-size: 35px;
+  /* border: 1px solid black; */
+  width: 1150px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Login_wrap{
+  font-size: 12px;
+  width: 250px;
+  font-family: 'Noto Sans KR', sans-serif;
+  /* border: 1px solid black; */
+  color: #BDBDBD;
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.HeadButtonWrap{
+  border: 1px solid black;
+  width: 1150px;
+  height: 60px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.Head_menuWrap{
+  /* border: 1px solid black; */
+  width: 500px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Head_Menu_1{
+  height: 30px;
+  width: 150px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 17px;
+  margin: auto;
+  display: flex;
+  flex-flow: column wrap;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border: 1px solid black;
 }
 
-.App-link {
-  color: #61dafb;
+.Serch_Wrap{
+  margin-left:35px;
+  /* border: 1px solid black; */
+  width: auto;
+  height: 60px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }
+
+.SearchBar{
+  background-color: #EEEEEE;
+  width: 180px;
+  height: 20px;
+  border-radius: 30px;
+  padding: 7px;
+  font-size: 14px;
+  color: #9E9E9E;
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_style{
+  margin-left: 40px;
+}
+
+.cart_style{
+  margin-left: 10px;
+}
+
+
+/* .ImgAnimation{
+  display: flex;
+  padding: 10px;
+  animation: slide 10s ease;
+  }
+
+@keyframes slide {
+  0% {
+    transform: translateX(-25%);
+  }
+  10% {
+    transform: translateY(-12%);
+  }
+  10% {
+    transform: translateX(-25%);
+  }
+  10% {
+    transform: translateX(-50%);
+  }
+  10% {
+    transform: translateY(-100%);
+  }
+} */
+
+
+
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +136,14 @@
   to {
     transform: rotate(360deg);
   }
+
 }
+
+
+@import url(
+  'https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap'
+  );
+
+  @import url(
+    'https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap
+    ');

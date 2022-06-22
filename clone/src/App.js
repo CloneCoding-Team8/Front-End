@@ -1,31 +1,69 @@
 import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-// 페이지 라우팅
-import ReviewWrite from "./page/Reviewwrite";
-// 추후 리뷰는 컴포넌트로 이동, 라우팅도 제외하고, 상세페이지 하단에 컴포넌트 넣기
-import Review from "./page/Review";
+
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { loadUserAxios, logOut } from "./redux/modules/user";
+import { useDispatch, useSelector } from "react-redux";
+
+import styled from "styled-components";
+
+import HeadFormbot from "./compo/form/HeadFormbot";
+import HeadFormtop from "./compo/form/HeadFormtop";
+import FooterForm from "./compo/form/FooterForm";
+import ProductDetail from "./compo/page/ProductDetail";
+import { setCookie, getCookie } from "universal-cookie";
+
+import Main from "./compo/page/Main";
+import Login from "./compo/page/Login";
+import Join from "./compo/page/Join";
+import Basket from "./compo/page/ShoppingBasket";
+
+// import Test from "./compo/page/Test"
+// 리뷰관련
 import ReviewEdit from "./page/ReviewEdit";
+import ReviewWrite from "./page/Reviewwrite";
 
 function App() {
-  // 상품 아이템별 고유번호-> 추후 BE 통신하여 useSelector로 가져오기
-  // const [productId, setProductId] = useState("1");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // const cookies = new Cookies();
+
+  console.log(document.cookie);
+  // console.log(getCookie('refreshtoken'))
 
   return (
     <div className="App">
+      <HeadFormAlign>
+        <HeadFormtop />
+        <HeadFormbot />
+      </HeadFormAlign>
       <Routes>
-        <Route path="/review" element={<Review />} />
-        {/* <Route
-          path="/reviewDetail/:productId"
-          element={<ReviewDetail/>}
-        /> */}
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
+        <Route path="/basket" element={<Basket />} />
+        <Route path="/productdetail" element={<ProductDetail />} />
+        {/* 리뷰관련 */}
+        {/* <Route path="/productdetail/:productId" element={<ProductDetail />} /> */}
         <Route
           path="/reviewwrite/:index/:productId"
           element={<ReviewWrite />}
         />
         <Route path="/reviewedit/:index/:productId" element={<ReviewEdit />} />
       </Routes>
+      <div>
+        {/* <Test/> */}
+        <FooterForm />
+      </div>
     </div>
   );
 }
+
+const HeadFormAlign = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default App;
