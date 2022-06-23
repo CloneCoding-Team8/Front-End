@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { loadCatalogAxios, changePage } from "../../redux/modules/catalog";
+import { loadCatalogAxios, changePage, ProductPage } from "../../redux/modules/catalog";
 
 import React from 'react'
 
@@ -9,24 +9,26 @@ import Prev from "../../image/left_icon.svg"
 import Next from "../../image/right_icon.svg"
 
 
-
-
 function Body() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const productLists = useSelector((state) => state.catalog.list.content);
-
+  const pageViewNum = useSelector((state) => state.catalog.currentPage);
+  const totalPages = useSelector((state) => state.catalog.list.totalPages)
+  
   console.log(productLists)
+  console.log(pageViewNum)
 
-React.useEffect(() => { 
-    dispatch(loadCatalogAxios()); 
-  },[]);
+    React.useEffect(() => { 
+        dispatch(loadCatalogAxios())
+        dispatch(ProductPage(pageViewNum))
+    },[pageViewNum]);
 
   return (
     <div>
       <Catalog>
-        <Left>
+        <Left onClick={() => {dispatch(changePage(pageViewNum < 0 ? pageViewNum + 1 : '' ))}} >
           <img src={Prev} />
         </Left>
         {productLists === undefined
@@ -38,14 +40,14 @@ React.useEffect(() => {
                   <CatalogWrapBot>
                     <CatalogTitle >{list.title}</CatalogTitle>
                     <div>
-                      <CatalogPrice>{list.price}원</CatalogPrice>
+                      <CatalogPrice>{list.price + ' \ '}원</CatalogPrice>
                       <CatalogStar>⭐ {list.star}</CatalogStar>
                     </div>
                   </CatalogWrapBot>
                 </CatalogWrap>
               );
             })}
-        <Right>
+        <Right onClick={() => {dispatch(changePage(pageViewNum > 3 ? pageViewNum - 1 : pageViewNum +1 ))}} >
           <img src={Next} />
         </Right>
       </Catalog>
@@ -136,7 +138,7 @@ const CatalogPrice = styled.div`
 `
 
 const CatalogStar = styled.div`
-    font-size: 17px;
+    font-size: 20px;
     font-weight: bold;
     width:350px;
     /* border: 1px solid black; */

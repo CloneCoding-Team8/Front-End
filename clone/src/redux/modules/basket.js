@@ -2,11 +2,11 @@ import produce from "immer";
 import { apis } from "../../shared/api";
 
 // Actions
-const LOAD = "catalog/LOAD";
-// const CREATE = "catalog/CREATE";
-const PAGE = "catalog/PAGE";
+const LOAD = "basket/LOAD";
+const ADD = "catalog/ADD";
+// const PAGE = "basket/PAGE";
 // const UPDATE = "catalog/UPDATE";
-const DETAIL = "catalog/DETAIL";
+// const DETAIL = "basket/DETAIL";
 // const DELETE = "catalog/DELETE";
 
 
@@ -19,26 +19,26 @@ const initialState = {
 
 
 // Action Creators
-export function loadCatalog(catalog_info) {
-  return { type: LOAD, catalog_info };
+export function loadBasket(basket_info) {
+  return { type: LOAD, basket_info };
 }
 
-export function detailPage(detail) {
-  return { type: DETAIL, detail };
+export function addbasket(basket_add) {
+  return { type: ADD, basket_add };
 }
 
-export function changePage(page) {
-  return { type: PAGE, page };
-}
+// export function changePage(page) {
+//   return { type: PAGE, page };
+// }
 
 
 //middlewares
-export const ProductPage = (pageViewNum) => {
+export const basketPage = () => {
     return async function (dispatch) {
       await apis
-        .catalogList(pageViewNum)
-        .then((catalog_data) => {
-          dispatch(loadCatalog(catalog_data.data));
+        .basket()
+        .then((basket_data) => {
+          dispatch(loadBasket(basket_data.data));
         })
         .catch((err) => {
           console.log(err);
@@ -47,37 +47,47 @@ export const ProductPage = (pageViewNum) => {
   };
 
 
-export const loadCatalogAxios = (id) => {
-  return async function (dispatch) {
-    await apis
-      .catalogDetail(id)
-      .then((catalog_data) => {
-          console.log(catalog_data)
-        dispatch(loadCatalog(catalog_data.data));
-      })
+  export const postBookAxios = () => {
+    return async function (dispatch) {
+      await apis
+      .addbasket()
       .catch((err) => {
-        console.log(err);
+        alert("로그인을 해주세요!");
       });
+    };
   };
-};
+
+// export const loadCatalogAxios = (id) => {
+//   return async function (dispatch) {
+//     await apis
+//       .catalogDetail(id)
+//       .then((catalog_data) => {
+//           console.log(catalog_data)
+//         dispatch(loadCatalog(catalog_data.data));
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   };
+// };
 
 
-export const loadDetailAxios = (id) => {
-  return async function (dispatch) {
-    console.log(id)
-    await apis
+// export const loadDetailAxios = (id) => {
+//   return async function (dispatch) {
+//     console.log(id)
+//     await apis
         
-      .productInfo(id)
+//       .productInfo(id)
 
-      .then((catalog_data) => {
-          console.log(catalog_data)
-        dispatch(detailPage(catalog_data.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
+//       .then((catalog_data) => {
+//           console.log(catalog_data)
+//         dispatch(detailPage(catalog_data.data));
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   };
+// };
 
 
 
@@ -85,7 +95,7 @@ export const loadDetailAxios = (id) => {
 // Reducer
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case "catalog/LOAD": {
+    case "basket/LOAD": {
         console.log(action.catalog_info.content)
       return {
         list: action.catalog_info,
@@ -94,22 +104,22 @@ export default function reducer(state = initialState, action = {}) {
       };
     }
 
-    case "catalog/PAGE": {
-        return { 
-            list: state.list, 
-            post: state.post, 
-            currentPage: action.page 
-        };
-      }
+    // case "catalog/PAGE": {
+    //     return { 
+    //         list: state.list, 
+    //         post: state.post, 
+    //         currentPage: action.page 
+    //     };
+    //   }
 
-    case "catalog/DETAIL": {
-        console.log(action.detail)
-      return {
-        list: state.list,
-        post: action.detail,
-        currentPage: state.currentPage,
-      };
-    }
+    // case "catalog/DETAIL": {
+    //     console.log(action.detail)
+    //   return {
+    //     list: state.list,
+    //     post: action.detail,
+    //     currentPage: state.currentPage,
+    //   };
+    // }
 
     // do reducer stuff
     default:

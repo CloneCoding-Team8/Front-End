@@ -24,18 +24,21 @@ export const apis = {
   catalogList: (pageViewNum) => api.get(`/api/product/list?page=${pageViewNum}&size=3`),
 //   bookpost: (frm) => imgApi.post("/api/bookreviews", frm),
 //   likeit: (id) => api.post(`/api/bookreviews/${id}/like`),
-  catalogDetail: (id) => api.get(`/api/product/list`),
+  catalogDetail: (id) => api.get("/api/product/list"),
   productInfo: (productid) => api.get(`/api/product/list/${productid}`),
-//   productInfo: () => api.get('/api/product/list/9'),
 
-  bookDelete: (id) => api.delete(`/api/bookreviews/${id}`),
+ //장바구니   
+ basket: () => api.get("/api/product/itemcheck"),
+ addbasket: (title, itemcount) => api.post("/api/product/item",
+ {
+     title: title,
+     itemcount: itemcount
+ }),
 
-
-
-
+  
 
  // review api
-  load: (productid) => api.get(`/api/review/list/${productid}`),
+ load: (productid) => api.get(`/api/review/list/${productid}`),
  add: (reviewid) => api.get(`/api/review/detail/${reviewid}`),
  edit: (reviewid, formData) => api.patch(`/api/review/${reviewid}`, formData),
  del: (reviewid) => api.delete(`/api/review/${reviewid}`),

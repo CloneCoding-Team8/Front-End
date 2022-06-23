@@ -38,8 +38,6 @@ const Review = () => {
       id: "test 2",
       nickname: "test",
       modified: "2022.06.20",
-      itemimg:
-        "https://www.google.com/imgres?imgurl=http%3A%2F%2Fm.62life.com%2Fimages%2Fgdimg%2F46021004_main1.jpg&imgrefurl=http%3A%2F%2Fwww.62life.com%2Fm%2Fgoods%2Fitem_detail_m.asp%3Fodtype%3D11%26odtype2%3D01%26gdtype%3D70%26gdcd%3D46021004%26divcd%3D30&tbnid=UoTibdwJVew4DM&vet=12ahUKEwjn35LY6734AhXYzosBHYJpAQwQMyg9egQIARBy..i&docid=YlPKJyDzGFOR1M&w=500&h=600&q=%EC%83%81%ED%92%88%20%EC%82%AC%EC%A7%84&ved=2ahUKEwjn35LY6734AhXYzosBHYJpAQwQMyg9egQIARBy",
       content: "testcontent",
       star: "4",
     },

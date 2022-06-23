@@ -14,16 +14,16 @@ function ProductDetail (props) {
     const param = useParams()
     console.log(param.id)
 
-
     const productinfo = useSelector((state) => state.catalog.list.content);
-    console.log(productinfo)
-
     const detailinfo = useSelector((state) => state.catalog.post)
-    console.log(detailinfo)
-
+    
     const productid = param.id
     const priceinfo = detailinfo.price + detailinfo.price
     
+    const title = React.useRef(null);
+    const productCount = React.useRef(null);
+
+
   React.useEffect(() => { 
       dispatch(loadDetailAxios(productid))
     },[]);
@@ -38,18 +38,18 @@ function ProductDetail (props) {
             </ProductPicDetailWrap>
         </ProductDetailLeftWrap>
         <ProductDetailRightWrap>
-            <DetailTitle>{detailinfo.title}</DetailTitle>
+            <DetailTitle ref={title}>{detailinfo.title}</DetailTitle>
             <DetilPrice>{detailinfo.price + ' \ '}원</DetilPrice>
             <DetailMiniTitle>⭐ {' \ ' + detailinfo.star}</DetailMiniTitle>
             <DetailPoint>상품 배송비{' \ ' + detailinfo.deliveryFee + ' \ '} 원</DetailPoint>
             <DetailPoint>134 구매</DetailPoint>
             <DetailPoint>70원 적립</DetailPoint>
             <DetailPoint>
-                <DetailPointSelectBox style={{width:"460px", padding:"10px", outline:"none"}}>
-                    <option value="first">옵션 : 가격 : 재고</option>
-                    <option vlaue="second">1+1 : {priceinfo}원 : 재고</option>
-                    <option value="third">1+2 : {priceinfo + detailinfo.price}원 : 재고</option>
-                    <option value="third">2+2 : {priceinfo + priceinfo}원 : 재고</option>
+                <DetailPointSelectBox ref={productCount} style={{width:"460px", padding:"10px", outline:"none"}}>
+                    <option value="default">수량 : 가격</option>
+                    <option key ="option1" vlaue="first">1 : {detailinfo.price + ' \ '}원</option>
+                    <option key ="option2" value="second">2 : {priceinfo + ' \ '}원</option>
+                    <option key="option3" value="third">3 : {priceinfo + detailinfo.price + ' \ ' }원</option>
                 </DetailPointSelectBox>
             </DetailPoint>
             <DetilButtonWrap>

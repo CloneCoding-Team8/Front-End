@@ -1,14 +1,22 @@
 import styled from 'styled-components'
 import React from 'react'
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { basketPage } from "../../redux/modules/basket";
 
 
 
 function ShoppingBasket () {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
 
     const [Counter, setCounter] = React.useState(1)
+    const basketLists = useSelector((state) => state.basket.list.content);
+
+    console.log(basketLists)
+
 
     const onIncrease = () => {
         setCounter(Counter +1)
@@ -21,6 +29,10 @@ function ShoppingBasket () {
                 window.alert('상품이 없습니다.')
             }
     }
+
+    React.useEffect(() => { 
+        dispatch(basketPage())
+      },[]);
 
 
     return (
